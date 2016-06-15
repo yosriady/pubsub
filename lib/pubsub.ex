@@ -2,7 +2,7 @@ defmodule Pubsub do
     use GenServer
 
     # https://github.com/uwiger/gproc/wiki/The-gproc-api
-    @type type :: :n | :p | :c | :a
+    @type type :: :n | :p | :c | :a | :r | :rc
     @type scope :: :l | :g
     @type name :: term
     @type key :: {type, scope, name}
