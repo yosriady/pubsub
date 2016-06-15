@@ -32,4 +32,5 @@ iex> Pubsub.subscribers(:test)
 Pubsub relies on [`gproc`](https://github.com/uwiger/gproc/wiki/The-gproc-api), which does most of the heavy lifting.
 
 [Full `gproc` API Reference](https://github.com/uwiger/gproc/blob/master/doc/gproc.md)
+
 [GProc - Erlang Global Process Registry](http://blog.rusty.io/2009/09/16/g-proc-erlang-global-process-registry/)
