@@ -15,12 +15,16 @@ iex -S mix
 ## Try it
 
 ```
-iex> GenServer.start_link(Pubsub, [], [])
+iex> Pubsub.subscribe(:test)
 {:ok, #PID<0.141.0>}
-iex> GenServer.start_link(Pubsub, [], [])
+iex> Pubsub.subscribe(:test)
 {:ok, #PID<0.143.0>}
-iex> :gproc.send({:p, :l, :hello}, "hey")
-"Got \"hey\" in process #PID<0.141.0>"
+iex> Pubsub.publish(:test, "hey")
 "hey"
+"Got \"hey\" in process #PID<0.141.0>"
 "Got \"hey\" in process #PID<0.143.0>"
 ```
+
+## Reference
+
+Pubsub relies on [`gproc`](https://github.com/uwiger/gproc/wiki/The-gproc-api), which does most of the heavy lifting.
