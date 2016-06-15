@@ -1,13 +1,23 @@
 defmodule Pubsub do
     use GenServer
 
+    # https://github.com/uwiger/gproc/wiki/The-gproc-api
+    @type type :: :n | :p | :c | :a
+    @type scope :: :l | :g
+    @type name :: term
+    @type key :: {type, scope, name}
+
     # Client API
     def subscribe(topic) do
         GenServer.start_link(__MODULE__, [topic: topic], [])
     end
 
-    def publish(topic, message) do
-        GenServer.cast({:via, :gproc, {:p, :l, topic}}, message)
+    def subscribers(topic) do
+        :gproc.lookup_pids({:p, :l, topic})
+    end
+
+    def broadcast(topic, message) do
+        :gproc.send({:p, :l, topic}, message)
     end
 
     # Server API
@@ -16,8 +26,8 @@ defmodule Pubsub do
       {:ok, []}
     end
 
-    def handle_cast(msg, state) do
-      IO.inspect "Got #{inspect msg} in process #{inspect self()}"
+    def handle_info(message, state) do
+      IO.inspect "Got #{inspect message} in process #{inspect self()}"
       {:noreply, state}
     end
 end

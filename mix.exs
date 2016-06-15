@@ -27,6 +27,9 @@ defmodule Pubsub.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:gproc, "~> 0.5.0"}]
+    [
+        {:gproc, "~> 0.5.0"},
+        {:dialyxir, "~> 0.3", only: [:dev]}
+    ]
   end
 end
