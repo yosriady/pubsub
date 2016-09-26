@@ -9,7 +9,7 @@ defmodule Pubsub do
 
     # Client API
     def subscribe(topic) do
-        GenServer.start_link(__MODULE__, [topic: topic], [])
+        :gproc.reg({:p,:l,topic})
     end
 
     def subscribers(topic) do
